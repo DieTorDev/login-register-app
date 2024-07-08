@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const tasksRoutes = require('./routes/tasks.routes');
+const authRoutes = require('./routes/auth.routes');
+const usersRoutes = require('./routes/users.routes');
 
 require('dotenv').config();
 
@@ -13,14 +14,16 @@ require('dotenv').config();
 const corsOptions = {
   origin: 'http://localhost:5173', // Dominios autorizados
   methods: '*', // Métodos permitidos
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  credentials: true
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 
 // Uso de rutas
-app.use('/api/tasks', tasksRoutes);
+app.use('/auth', authRoutes);
+app.use('/api/users', usersRoutes);
 
 const startSever = async () => {
   try {
@@ -30,7 +33,7 @@ const startSever = async () => {
     console.log('Connecting error');
   }
   app.listen(process.env.PORT, () =>
-    console.log(`Servidor en ejecución en el puerto ${process.env.PORT}`)
+    console.log(`Server running at port ${process.env.PORT}`)
   );
 };
 
