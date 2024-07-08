@@ -41,4 +41,22 @@ const loginRequest = async (user, setUser) => {
 	}
 };
 
-export { registerUser, loginRequest };
+const verifyToken = async () => {
+	try {
+		const response = await fetch(URLS.VERIFY_TOKEN, {
+			method: METHODS.GET,
+			headers: HEADERS,
+			credentials: 'include'
+		});
+		if (!response.ok) {
+			throw new Error(`Failed response: ${response.status}`);
+		}
+		const data = await response.json();
+		return data;
+	} catch (err) {
+		console.log('Invalid Token');
+		return false;
+	}
+};
+
+export { registerUser, loginRequest, verifyToken };
