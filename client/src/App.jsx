@@ -1,21 +1,16 @@
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Users from './pages/Users';
+import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from './providers/AuthProvider';
 import { GlobalStyles } from './styles/GlobalStyles';
+import Router from './router/Router';
 
 const App = () => {
 	return (
-		<>
+		<BrowserRouter>
 			<AuthProvider>
 				<GlobalStyles />
-				<Home />
-				<Register />
-				<Login />
-				<Users />
+				<Router />
 			</AuthProvider>
-		</>
+		</BrowserRouter>
 	);
 };
 

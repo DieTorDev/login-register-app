@@ -1,10 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import GoBack from '../components/GoBack/GoBack';
 import { registerUser } from '../utils/auth';
 
 const Register = () => {
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<h1>REGISTER</h1>
-			<form onSubmit={handleSubmit}>
+			<GoBack />
+			<form onSubmit={e => handleSubmit(e, navigate)}>
 				<input type='text' placeholder='Username' name='username' />
 				<input type='text' placeholder='Email' name='email' />
 				<input type='text' placeholder='Password' name='password' />
@@ -14,7 +19,7 @@ const Register = () => {
 	);
 };
 
-const handleSubmit = async event => {
+const handleSubmit = async (event, navigate) => {
 	event.preventDefault();
 	const { username, email, password } = event.target;
 	const newUser = {
@@ -25,6 +30,8 @@ const handleSubmit = async event => {
 
 	const serverMessage = await registerUser(newUser);
 	console.log(serverMessage);
+
+	navigate('/');
 };
 
 export default Register;

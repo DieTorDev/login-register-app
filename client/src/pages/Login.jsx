@@ -1,16 +1,18 @@
 import { useContext } from 'react';
 import AuthContext from '../contexts/authContext';
 import { loginRequest } from '../utils/auth';
+import GoBack from '../components/GoBack/GoBack';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-	const { userLogged, setUserLogged } = useContext(AuthContext);
-
-	console.log(userLogged);
+	const { setUserLogged } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	return (
 		<>
 			<h1>LOGIN</h1>
-			<form onSubmit={event => handleSubmit(event, setUserLogged)}>
+			<GoBack />
+			<form onSubmit={event => handleSubmit(event, setUserLogged, navigate)}>
 				<input type='text' placeholder='Email' name='email' />
 				<input type='text' placeholder='Password' name='password' />
 				<input type='submit' value='Login' />
@@ -19,7 +21,7 @@ const Login = () => {
 	);
 };
 
-const handleSubmit = async (event, setUserLogged) => {
+const handleSubmit = async (event, setUserLogged, navigate) => {
 	event.preventDefault();
 
 	const { email, password } = event.target;
@@ -30,6 +32,8 @@ const handleSubmit = async (event, setUserLogged) => {
 
 	const serverMessage = await loginRequest(loginData, setUserLogged);
 	console.log(serverMessage);
+
+	navigate('/');
 };
 
 export default Login;

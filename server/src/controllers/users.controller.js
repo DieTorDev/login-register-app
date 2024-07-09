@@ -11,4 +11,18 @@ usersController.getUsers = async (req, res) => {
   }
 };
 
+usersController.deleteUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await UserModel.findById(id);
+
+    if (!user) return res.status(404).send({ message: 'User not found' });
+
+    await UserModel.deleteOne({ _id: id });
+
+    const allUsers = await UserModel.find();
+    res.status(202).send(allUsers);
+  } catch {}
+};
+
 module.exports = usersController;

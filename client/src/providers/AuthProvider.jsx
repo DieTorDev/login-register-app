@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		checkLogin(setUserLogged, setLoading);
-	});
+	}, []);
 
 	return (
 		<AuthContext.Provider value={{ userLogged, setUserLogged, loading }}>
@@ -20,8 +20,6 @@ const AuthProvider = ({ children }) => {
 
 const checkLogin = async (setUserLogged, setLoading) => {
 	const cookies = Cookies.get();
-
-	console.log(cookies);
 
 	if (!cookies.token) {
 		setLoading(false);
