@@ -5,7 +5,7 @@ import GoBack from '../components/GoBack/GoBack';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-	const { setUserLogged } = useContext(AuthContext);
+	const { userLogged, setUserLogged } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	return (
@@ -15,7 +15,7 @@ const Login = () => {
 			<form onSubmit={event => handleSubmit(event, setUserLogged, navigate)}>
 				<input type='text' placeholder='Email' name='email' />
 				<input type='text' placeholder='Password' name='password' />
-				<input type='submit' value='Login' />
+				<input type='submit' value='Login' disabled={userLogged} />
 			</form>
 		</>
 	);
@@ -25,6 +25,9 @@ const handleSubmit = async (event, setUserLogged, navigate) => {
 	event.preventDefault();
 
 	const { email, password } = event.target;
+
+	if (!email.value || !password.value) return;
+
 	const loginData = {
 		email: email.value,
 		password: password.value

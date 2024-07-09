@@ -8,8 +8,8 @@ const Header = () => {
 
 	return (
 		<StyledHeader>
-			<h1>HEADER</h1>
-			{userLogged && <h3>Hello {userLogged.username}</h3>}
+			<h1>LOGIN APP</h1>
+			{userLogged && <h3>Hello {userLogged.username}!</h3>}
 			<StyledNav>
 				<StyledMenu>
 					<li>

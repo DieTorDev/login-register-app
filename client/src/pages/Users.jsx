@@ -27,7 +27,7 @@ const Users = () => {
 						<p>{user.email}</p>
 						{userLogged?.id === user._id && (
 							<>
-								<button>Edit</button>
+								<button onClick={() => navigate('/edit-user')}>Edit</button>
 								<button
 									onClick={() =>
 										deleteUser(setAllUsers, user, setUserLogged, navigate)

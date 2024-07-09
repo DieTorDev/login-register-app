@@ -3,6 +3,7 @@ const usersController = require('../controllers/users.controller');
 const usersRoutes = express.Router();
 
 usersRoutes.get('/', usersController.getUsers);
+usersRoutes.patch('/:id', usersController.editUser);
 usersRoutes.delete('/:id', usersController.deleteUser);
 
 module.exports = usersRoutes;

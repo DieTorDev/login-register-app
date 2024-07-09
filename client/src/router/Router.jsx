@@ -6,6 +6,7 @@ import Register from '../pages/Register';
 import ProtectedRoutes from './ProtectedRouter';
 import Users from '../pages/Users';
 import Profile from '../pages/Profile';
+import EditUser from '../pages/EditUser';
 
 const Router = () => {
 	return (
@@ -17,6 +18,7 @@ const Router = () => {
 			<Route path='/login' element={<Login />} />
 			<Route path='/register' element={<Register />} />
 			<Route path='/users' element={<Users />} />
+			<Route path='/edit-user' element={<EditUser />} />
 
 			<Route element={<ProtectedRoutes />}>
 				<Route path='/profile' element={<Profile />} />
