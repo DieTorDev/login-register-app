@@ -5,6 +5,7 @@ import { URLS } from '../constants/urls';
 import GoBack from '../components/GoBack/GoBack';
 import AuthContext from '../contexts/authContext';
 import { useNavigate } from 'react-router-dom';
+import { StyledUserCard, StyledUserColoImg } from './users.styles';
 
 const Users = () => {
 	const [allUsers, setAllUsers] = useState();
@@ -22,7 +23,10 @@ const Users = () => {
 				<h1>USERS</h1>
 				<GoBack />
 				{allUsers.map(user => (
-					<div key={user._id}>
+					<StyledUserCard key={user._id}>
+						<StyledUserColoImg $color={user.color}>
+							{user.username.charAt(0).toUpperCase()}
+						</StyledUserColoImg>
 						<h3>{user.username}</h3>
 						<p>{user.email}</p>
 						{userLogged?.id === user._id && (
@@ -37,7 +41,7 @@ const Users = () => {
 								</button>
 							</>
 						)}
-					</div>
+					</StyledUserCard>
 				))}
 			</>
 		);

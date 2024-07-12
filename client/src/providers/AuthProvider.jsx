@@ -5,7 +5,9 @@ import { verifyToken } from '../utils/auth';
 
 const AuthProvider = ({ children }) => {
 	const [userLogged, setUserLogged] = useState(null);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
+
+	console.log(userLogged);
 
 	useEffect(() => {
 		checkLogin(setUserLogged, setLoading);

@@ -7,7 +7,7 @@ const ProtectedRoutes = () => {
 
 	if (loading) return <h1>Loading...</h1>;
 
-	if (!userLogged) return <Navigate to='/login' />;
+	if (!userLogged && !loading) return <Navigate to='/login' />;
 
 	return <Outlet />;
 };

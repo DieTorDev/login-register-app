@@ -9,13 +9,18 @@ const authController = {};
 authController.register = async (req, res) => {
   const { username, email, password } = req.body;
 
+  const r = Math.floor(Math.random() * 240);
+  const g = Math.floor(Math.random() * 240);
+  const b = Math.floor(Math.random() * 240);
+
   try {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = new UserModel({
       username,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      color: `rgb(${r},${g},${b})`
     });
 
     await newUser.save();
@@ -48,7 +53,8 @@ authController.login = async (req, res) => {
     return res.cookie('token', token).send({
       id: userFound._id,
       username: userFound.username,
-      email: userFound.email
+      email: userFound.email,
+      color: userFound.color
     });
   } catch (err) {
     return res.status(500).send({ message: err.message });
@@ -76,7 +82,9 @@ authController.verifyToken = async (req, res) => {
     return res.status(200).send({
       id: userFound._id,
       username: userFound.username,
-      email: userFound.email
+      email: userFound.email,
+      color: userFound.color,
+      img: userFound.img
     });
   } catch (err) {
     return res.status(500).send({ message: 'Internal server error' });

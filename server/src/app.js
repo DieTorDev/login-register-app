@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
+const path = require('path');
 const authRoutes = require('./routes/auth.routes');
 const usersRoutes = require('./routes/users.routes');
 
@@ -22,6 +24,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+app.use(fileUpload());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Uso de rutas
 app.use('/auth', authRoutes);

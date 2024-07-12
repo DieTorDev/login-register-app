@@ -37,6 +37,7 @@ const editUser = async (event, userLogged, setUserLogged, navigate) => {
 		username: username.value,
 		email: email.value
 	});
+
 	setUserLogged({
 		...userLogged,
 		username: username.value,
